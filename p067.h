@@ -20,7 +20,7 @@ long long int problem()
 		i++;
 	}
 
-	print2DVector(triangle);
+	//print2DVector(triangle);
 	for ( unsigned int i = 0; i < triangle.size()-1; i++ )
 	{
 		triangle[i+1][0] += triangle[i][0];
