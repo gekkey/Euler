@@ -16,7 +16,7 @@ def phi(n):
 	f = trialFactor(n)
 	for i in range(1, len(f)+1):
 		for a in comb(f, i):
-			if i % 2 == 0: 
+			if i % 2 == 0:
 				p += int((n-1)/prod(a))
 			else:
 				p -= int((n-1)/prod(a))
@@ -25,7 +25,6 @@ def phi(n):
 t1 = t()
 lp = ln = 0
 for n in range(2, N+1):
-	#if n in P: continue
 	cp = n/phi(n)
 	if cp > lp: lp, ln = cp, n
 print("largest n:",ln, "- n/phi(n) ratio:", lp)

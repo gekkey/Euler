@@ -9,7 +9,7 @@
 #include <gmp.h>
 #include <gmpxx.h>
 #include <time.h>
-#include <windows.h>
+//#include <windows.h>
 #include "sharedfunctions.h"
 //#include "testing.h"
 #include "p067.h"
