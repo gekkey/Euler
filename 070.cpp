@@ -1,7 +1,7 @@
 #include <iostream>
 #include "phi.h"
 #include "sieve.h"
-#include "permutation.h"
+#include "perm.h"
 
 int main(int argc, char *argv[])
 {
