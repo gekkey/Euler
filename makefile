@@ -2,13 +2,13 @@ CC=g++ -std=c++11 -Wall -Llib -Iinclude -lstdc++
 EXFLAGS=-Wl,-rpath=./lib
 SOFLAGS=-shared -fPIC
 
-all: bin/71 bin/1 bin/2 bin/68 bin/3 bin/69 bin/70
+all: bin/71 bin/1 bin/2 bin/68 bin/3 bin/69 bin/70 bin/72
 
 clean:
 	rm bin/* lib/*.so
 
-bin/71: 071.cpp lib/libgcd.so
-	$(CC) $(EXFLAGS) 071.cpp -o bin/71 -lgcd
+bin/71: 071.cpp 
+	$(CC) $(EXFLAGS) 071.cpp -o bin/71 
 
 bin/1: 001.cpp 
 	$(CC) $(EXFLAGS) 001.cpp -o bin/1 
@@ -27,6 +27,9 @@ bin/69: 069.cpp lib/libphi.so lib/libsieve.so
 
 bin/70: 070.cpp lib/libphi.so lib/libsieve.so lib/libperm.so
 	$(CC) $(EXFLAGS) 070.cpp -o bin/70 -lphi -lsieve -lperm
+
+bin/72: 072.cpp lib/libphi.so lib/libsieve.so
+	$(CC) $(EXFLAGS) 072.cpp -o bin/72 -lphi -lsieve
 
 lib/libphi.so: phi.cpp lib/libsieve.so lib/libgcd.so
 	$(CC) $(SOFLAGS) phi.cpp -o lib/libphi.so -lsieve -lgcd

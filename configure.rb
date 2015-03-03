@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 s = <<-SH
 CC=g++ -std=c++11 -Wall -Llib -Iinclude -lstdc++
 EXFLAGS=-Wl,-rpath=./lib

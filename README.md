@@ -13,4 +13,7 @@ I used bit arithmetic to implement the binary greatest common divisor algorithm,
 I reused most of the previous problem's solution, except I had to flip the tests, and write a function to compare the digits of two integers, returning false if one was ever not found.
 
 ## 071: reduced fraction n/d left of 3/7 where d < 1,000,000
-I started with a denominator of 1,000,000 and worked up, multiplying the denominator by 3/7 to get the numerator, then comparing that to the previous closest.
+I started with a denominator of 1,000,000 and worked down, multiplying the denominator by 3/7 to get the numerator, then comparing that to the previous closest.
+
+## 072: number of reduced proper fractions < 1,000,000
+I just added up the totient of every number, which still took less than a second.
