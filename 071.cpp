@@ -15,6 +15,6 @@ int main(int argc, char *argv[])
 			f = d;
 		}
 	}
-	std::cout << e << " / " << f << std::endl;
+	std::cout << e << std::endl;
 	return 0;
 }

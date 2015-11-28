@@ -4,6 +4,12 @@ CC=g++ -std=c++11 -Wall -Llib -Iinclude -lstdc++
 EXFLAGS=-Wl,-rpath=./lib
 SOFLAGS=-shared -fPIC
 
+_all: all
+bin:
+	mkdir bin
+lib:
+	mkdir lib
+
 SH
 
 srcfiles = Dir['*.cpp'].map {|filename| filename[0...-4]}
@@ -15,7 +21,7 @@ binfiles = binsrc.map {|filename| 'bin/' + filename.match(/0*(.*)/)[1]}
 libfiles = libsrc.map {|filename| 'lib/lib' + filename.match(/([^0-9]*)/)[1] + '.so'}
 
 s << "all: " + binfiles.join(' ') + "\n\n"
-s << "clean:\n\trm bin/* lib/*.so\n\n"
+s << "clean:\n\trm -r bin lib\n\n"
 
 binfiles.each_with_index do |filename, i|
   deps = []
@@ -26,7 +32,7 @@ binfiles.each_with_index do |filename, i|
   end
   s << filename + ": " + binsrc[i] + ".cpp "
   s << deps.map {|dep| "lib/lib" + dep + ".so"} .join(' ')
-  s << "\n\t"
+  s << "| bin\n\t"
   s << '$(CC) $(EXFLAGS) ' + binsrc[i] + '.cpp -o ' + filename + ' '
   s << deps.map {|dep| '-l' + dep} .join(' ')
   s << "\n\n"
@@ -42,7 +48,7 @@ libfiles.each_with_index do |filename, i|
   end
   s << filename + ": " + libsrc[i] + ".cpp "
   s << deps.map {|dep| "lib/lib" + dep + ".so"} .join(' ')
-  s << "\n\t"
+  s << "| lib\n\t"
   s << '$(CC) $(SOFLAGS) ' + libsrc[i] + '.cpp -o ' + filename + ' '
   s << deps.map {|dep| '-l' + dep} .join(' ')
   s << "\n\n"

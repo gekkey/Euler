@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		p = phi(n, sieve);
 		if (!is_permutation(n, p)) continue;
 		m = n/(double)p;
-		std::cout << n << " / " << p << " = " << m << std::endl;
+//		std::cout << n << " / " << p << " = " << m << std::endl;
 		if (m < smallest)
 		{
 			smallest = m;
