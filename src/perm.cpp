@@ -1,21 +1,12 @@
 #include <iostream>
-int digits_in(int a)
-{
-	int i = 0;
-	while (a)
-	{
-		a /= 10;
-		++i;
-	}
-	return i;
-}
+#include "digits.h"
 
 bool is_permutation(int a, int b)
 {
-	if (digits_in(a) != digits_in(b)) return false;
+	if (digits_in_int(a) != digits_in_int(b)) return false;
 
 	bool found;
-	int n = digits_in(a), m = 0;
+	int n = digits_in_int(a), m = 0;
 	int digits[n];
 
 	while (a)

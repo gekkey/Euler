@@ -2,7 +2,9 @@
 import os, re
 
 s = """
-CC=g++ -std=c++11 -Wall -Llib -Iinclude -lstdc++
+CC=gcc
+CXX=g++ -std=c++11 -lstdc++
+CFLAGS += -Wall -Llib -Iinclude
 EXFLAGS=-Wl,-rpath=./lib
 SOFLAGS=-shared -fPIC
 
@@ -25,6 +27,7 @@ s += "lib/:\n\tmkdir -p lib\n\n"
 
 for srcname, binname in zip(binsrc, binfiles):
     deps = []
+    compiler = "$(CXX)" if re.search('\.cpp', srcname) else '$(CC)'
     with open(srcname) as fo:
         for line in fo:
             match = re.search('#include "(.*)\.h"', line)
@@ -34,12 +37,13 @@ for srcname, binname in zip(binsrc, binfiles):
     s += ' '.join(libfiles[dep][1] for dep in deps)
     s += ' | bin/\n\t'
 
-    s += '$(CC) $(EXFLAGS) ' + srcname + ' -o ' + binname + ' '
+    s += compiler + ' $(CFLAGS) $(EXFLAGS) ' + srcname + ' -o ' + binname + ' '
     s += ' '.join('-l' + dep for dep in deps)
     s += '\n\n'
 
 for k in libfiles:
     srcname, libname = libfiles[k]
+    compiler = "$(CXX)" if re.search('\.cpp', srcname) else '$(CC)'
     deps = []
     with open(srcname) as fo:
         for line in fo:
@@ -50,7 +54,7 @@ for k in libfiles:
     s += ' '.join(libfiles[dep][1] for dep in deps)
     s += ' | lib/\n\t'
 
-    s += '$(CC) $(SOFLAGS) ' + srcname + ' -o ' + libname + ' '
+    s += compiler + ' $(CFLAGS) $(SOFLAGS) ' + srcname + ' -o ' + libname + ' '
     s += ' '.join('-l' + dep for dep in deps)
     s += '\n\n'
 
