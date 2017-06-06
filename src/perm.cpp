@@ -1,37 +1,32 @@
-#include <iostream>
+#include <cstdio>
 #include "digits.h"
 
 bool is_permutation(int a, int b)
 {
-	if (digits_in_int(a) != digits_in_int(b)) return false;
+	if ((a<0) != (b<0))
+		return false;
 
-	bool found;
-	int n = digits_in_int(a), m = 0;
-	int digits[n];
+	char n = 0, m = 0;
+	signed char digits[10] {};
 
 	while (a)
 	{
-		digits[m] = a % 10;
+		digits[a%10]++;
 		a /= 10;
-		++m;
+		n++;
 	}
 
 	while (b)
 	{
-		m = b % 10;
+		digits[b%10]--;
 		b /= 10;
-		found = false;
-		for (int i = 0; i < n; ++i)
-		{
-			if (m == digits[i])
-			{
-				found = true;
-				digits[i] = -1;
-				break;
-			}
-		}
-		if (!found) break;
+		m++;
 	}
-
-	return found;
+	
+	if ( n != m )
+		return false;
+	for (int i = 0; i < 10; i++)
+		if ( digits[i] )
+			return false;
+	return true;
 }

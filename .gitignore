@@ -1,4 +1,6 @@
 *.swp
 bin/*
 lib/*
+build/*
+__pycache__/
 makefile

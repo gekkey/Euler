@@ -1,37 +1,62 @@
+#include <unordered_map>
+#include <cmath>
 #include "phi.h"
 #include "sieve.h"
 #include "gcd.h"
 
 // phi(n) = n * product([1-(1/p) for p in prime_divisors(n)])
-int phi(int n, bool *sieve)
+int phi(int n, bool *sieve, std::unordered_map<int, int> &memo)
 {
-	if (n < 2) return 0;
+	std::unordered_map<int, int>::const_iterator l;
+	if ( (l = memo.find(n)) != memo.end() )
+		return l->second;
+
+	if (n < 0) n *= -1;
+	if (n < 2) return n;
 	if (sieve[n]) return n - 1;
+
+	int r = n;
 
 	if (~n & 1)
 	{
-		int m = n >> 1;
-		return (~m & 1) ? phi(m, sieve) << 1 : phi(m, sieve);
+		r /= 2;
+		r = (~r & 1) ? phi(r, sieve, memo) * 2 : phi(r, sieve, memo);
+		memo[n] = r;
+		return r;
 	}
 
-	for (int m = 2; m < n; ++m)
+	int p;
+	int sq = (int)sqrt(n);
+	for (p = 2; p <= sq; ++p)
 	{
-		if (!sieve[m] || n % m) continue;
+		if (!sieve[p] || n % p) continue;
 
-		int o = n/m;
-		int d = gcd(m, o);
-		if (d == 1)
-			return phi(m, sieve)*phi(o, sieve);
-		else
-			return phi(m, sieve)*phi(o,sieve)*d/phi(d, sieve);
+		int m = n / p;
+		int d = gcd(m, p);
+		if (d == 1) {
+			r = phi(m, sieve, memo)*phi(p, sieve, memo);
+			memo[n] = r;
+			return r;
+		} else {
+			r = phi(m, sieve, memo)*phi(p,sieve, memo)*d/phi(d, sieve, memo);
+			memo[n] = r;
+			return r;
+		}
 	}
 
+	printf("phi error: %d\n", n);
 	return -1;
+}
+
+int phi(int n, bool *sieve)
+{
+	std::unordered_map<int, int> memo;
+	return phi(n, sieve, memo);
 }
 
 int phi(int n)
 {
-	bool *sieve = create_sieve(n);
+	bool *sieve = create_sieve(sqrt(n));
 	n = phi(n, sieve);
 	delete[] sieve;
 	return n;

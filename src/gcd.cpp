@@ -1,21 +1,22 @@
-int gcd(int n, int m)
+#include <algorithm>
+
+int gcd(int a, int b)
 {
-	if (n == m) return n;
-	if (m == 0) return n;
-	if (n == 0) return m;
+	if (a == 0) return b;
+	if (b == 0) return a;
 
-	if (~n & 1) // n is even
-	{
-		if (m & 1) // m is odd
-			return gcd(n >> 1, m);
-		else // m is even
-			return gcd(n >> 1, m >> 1) << 1;
-	}
-	if (~m & 1) // n is odd; m is even
-		return gcd(n, m >> 1);
+	int shift = __builtin_ctz(a | b);
+	a >>= __builtin_ctz(a);
+	do {
+		b >>= __builtin_ctz(b);
+		if (a > b) {
+			//std::swap(a, b);
+			int t = a;
+			a = b;
+			b = t;
+		}
+		b -= a;
+	} while (b);
 
-	// both are odd
-	if (n > m)
-		return gcd((n - m) >> 1, m);
-	return gcd((m - n) >> 1, n);
+	return a << shift;
 }
