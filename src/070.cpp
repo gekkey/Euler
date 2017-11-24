@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include "phi.h"
 #include "sieve.h"
-#include "perm.h"
+#include "permutation.h"
 
 int main(int argc, char *argv[])
 {

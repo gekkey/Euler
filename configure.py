@@ -13,7 +13,10 @@ SOFLAGS=-shared -fPIC
 # Patterns
 all: _all
 clean:
-	rm -r bin lib build
+	rm -rf ./bin ./lib ./build
+
+test:
+	python -c 'import unittest; from test import *; unittest.main()'
 
 bin/ lib/ build/:
 	mkdir -p $@

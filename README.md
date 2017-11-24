@@ -1,8 +1,6 @@
 # Euler
 Project Euler in C++
 
-The solutions in \_old I did when I was 17. The rest is more recent.
-
 ## 068: 5-gon ring
 I used recursion with greedy pruning to fill out the nodes of the ring, creating only those that could be the solution. I then created an array of pointers to positions in the nodes, and used than to generate and compare the best answer.
 

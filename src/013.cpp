@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
 {
 	FILE *fo = fopen("data/013.txt", "r");
 	char line[51];
+	char buf[11];
        	line[50] = '\0';
 	bigint sum;
 
@@ -13,7 +14,8 @@ int main(int argc, char *argv[])
 	{
 		sum += bigint(*line);
 	}
-	printf("%s\n", sum.cstr(10));
+	sum.to_str(buf, 10);
+	printf("%s\n", buf);
 
 	return 0;
 }
