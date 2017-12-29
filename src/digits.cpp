@@ -24,6 +24,8 @@ int num_digits_in(int a)
 }
 
 char *digit_array(int a)
+// useful for random access
+// FIXME needs to be freed
 {
 	int n = num_digits_in(a);
 	char *arr = (char *)malloc(n * sizeof(char));

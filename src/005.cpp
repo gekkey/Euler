@@ -2,7 +2,7 @@
 #include <limits.h>
 #include "sieve.h"
 
-int main(int argc, char *argv[])
+int main()
 {
 	int dividend = 0;
 

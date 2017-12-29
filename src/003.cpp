@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main(int argc, char *argv[])
+int main()
 {
 	long n = 600851475143;
 	int d = 2;

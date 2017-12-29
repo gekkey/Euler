@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main(int argc, char *argv[])
+int main()
 {
 	int sum = 0;
 	int a = 1, b = 1, c;

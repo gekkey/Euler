@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "digits.h"
 
-int main(int argc, char *argv[])
+int main()
 {
 	int r = 0; // return value
 	int t; // temporary product
