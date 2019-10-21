@@ -22,11 +22,10 @@ def make_test_case(num, answer):
     return test_case
 
 binfiles = sorted(os.listdir('bin/'))
-answers = [''] + open('answers.txt', 'r').read().split('\n')
+answers = [open('000.txt').read()] + open('answers.txt', 'r').read().split('\n')
 for f in binfiles:
     a = answers[int(f)]
     setattr(TestSolutions, "test_" + f, make_test_case(f, a))
 
 if __name__ == "__main__":
-    subprocess.run(["make", "all"])
     unittest.main()

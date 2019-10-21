@@ -1,16 +1,14 @@
 #include <cstdio>
 #include "bigint.h"
 
-int main(int argc, char *argv[])
+int main()
 {
-	bigint a (1);
-	bigint b (2);
-
-	for (int i = 0; i < 1000; i++)
-		a *= b;
+	bigint a = 1;
+	a <<= 1000;
 	int sum = 0;
-	for (std::list<char>::iterator i = a.data.begin(); i != a.data.end(); i++)
-		sum += *i;
+
+	while (a != 0)
+		sum += a.remainder_and_set(10);
 
 	printf("%d\n", sum);
 	return 0;

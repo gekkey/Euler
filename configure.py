@@ -4,8 +4,8 @@ EXCLUDE_FILE_EXTENSIONS = (".swp",)
 
 s = """\
 CC=gcc
-CXX=g++ -std=c++11 -lstdc++
-CFLAGS += -Wall -Werror -Llib -Iinclude
+CXX=g++ -std=c++17 -lstdc++
+CFLAGS+= -g -Wall -Werror -Llib -Iinclude
 EXFLAGS=-Wl,-rpath=./lib
 SOFLAGS=-shared -fPIC
 .PRECIOUS: build/%.o

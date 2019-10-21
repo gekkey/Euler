@@ -3,4 +3,5 @@ bin/*
 lib/*
 build/*
 __pycache__/
+.mypy_cache
 makefile
