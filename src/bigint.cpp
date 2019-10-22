@@ -133,7 +133,7 @@ bool bigint::operator!=(const int& other)
 	return ! (*this == other);
 }
 
-bool bigint::operator<(const bigint& other)
+bool bigint::operator<=(const bigint& other)
 {
 	if (this->data.size() < other.data.size())
 		return true;
@@ -148,8 +148,15 @@ bool bigint::operator<(const bigint& other)
 		if (*ai > *bi)
 			return false;
 	}
-	// equal
-	return false;
+	return 2;
+}
+
+bool bigint::operator<(const bigint& other)
+{
+	char test = (*this <= other);
+	if (test == 2)
+		return false;
+	return test;
 }
 
 // =====================================
@@ -279,11 +286,10 @@ bigint& bigint::operator<<=(unsigned bits)
 	auto ai = a.begin(), aj = a.begin();
 	ai++;
 	// ai is the number being shifted; aj is where it is shifted to
-	for (; ai != a.end(); ai++)
+	for (; ai != a.end(); ai++, aj++)
 	{
 		*aj += *ai >> (fullword_bits - bits);
 		*ai <<= bits;
-		aj++;
 	}
 	if (a.front() == 0) a.pop_front();
 
