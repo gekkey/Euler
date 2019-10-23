@@ -30,9 +30,9 @@ Find the value of d < 1000 for which 1/d contains the longest recurring cycle in
  * But we don't care about the actual digits. We're just looking for a repeated 
  * section, which will happed whenever the numerator repeats (since the divisor
  * is constant). If we're just looking for a repeated numerator, we can store 
- * where each one was first seen in a map. when we find one that been seen, or
- * it divides evenly, we're done. Using the index, instead of a bool, we can get
- * the distance from the last index to the first occurrence, applicable in 1/6.
+ * where each one was first seen in a map. When we see one for the second time,
+ * we know it's repeating. Having stored the index, we can get the distance 
+ * to the first occurrence, which isn't always the beginning (see 1/6).
  */
 
 #define lim 1000
